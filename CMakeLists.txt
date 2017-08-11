@@ -5,6 +5,9 @@ project(samp-plugin-mysql)
 SET(MYSQL_PLUGIN_VERSION "R41-3")
 
 option(BUILD_TESTS "Build tests" OFF)
+option(SAMP_MYSQL_INCLUDE_PLUGIN "Build tests" OFF)
+option(SAMP_MYSQL_USE_FOREIGN_EXTERNAL "Build tests" ON)
+
 
 # Base path constants
 set(SAMP_MYSQL_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
