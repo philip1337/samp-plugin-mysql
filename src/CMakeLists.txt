@@ -188,7 +188,7 @@ if(UNIX)
 endif()
 
 # MySQL
-target_include_directories(mysql 
+target_include_directories(samp-plugin-mysql-lib 
 	PRIVATE 
 		${MARIADB_EXTERNAL_INCLUDE}
 		${MARIADB_EXTERNAL_INCLUDE_BIN}
