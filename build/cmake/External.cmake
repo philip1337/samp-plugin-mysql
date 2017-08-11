@@ -7,6 +7,16 @@ if ("${BOOST_LIB_PATH}" STREQUAL "")
 	SET(BOOST_LIB_PATH ${SAMP_MYSQL_EXTERNAL}/boost)
 endif()
 
+if ("${MARIADB_EXTERNAL_INCLUDE}" STREQUAL "")
+	# Set paths
+	SET(MARIADB_EXTERNAL_INCLUDE ${SAMP_MYSQL_EXTERNAL}/mariadb/include)
+endif()
+
+if ("${MARIADB_EXTERNAL_INCLUDE_BIN}" STREQUAL "")
+	# Set paths
+	SET(MARIADB_EXTERNAL_INCLUDE_BIN ${SAMP_MYSQL_EXTERNAL_BIN}/mariadb/include)
+endif()
+
 ##################################################
 # AMXLib / sampsdk
 ##################################################
