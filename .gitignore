@@ -1,7 +1,7 @@
 [Bb]in/
 [Rr]elease/
 [Dd]ebug/
-
+external/
 #Linux
 *.o
 *.so
