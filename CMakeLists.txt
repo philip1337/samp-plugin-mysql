@@ -24,8 +24,10 @@ SET(CMAKE_MODULE_PATH
 	${SAMP_MYSQL_EXTERNAL}/sampcmake
 )
 
-include(External)
-include(ExternalBoost)
+if(NOT SAMP_MYSQL_USE_FOREIGN_EXTERNAL)
+	include(External)
+	include(ExternalBoost)
+endif()
 
 add_subdirectory(src)
 
