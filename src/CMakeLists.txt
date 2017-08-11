@@ -1,23 +1,15 @@
 include(AMXConfig)
 include(AddSAMPPlugin)
 
-if(NOT WIN32 AND MYSQLCAPI_LIBRARY_STATIC)
-	option(BUILD_STATIC "Build static library" OFF)
-endif()
-
-set(SAMP_SDK_ROOT "${PROJECT_SOURCE_DIR}/libs/sdk")
-find_package(SAMPSDK REQUIRED)
-
 set(MYSQL_PLUGIN_CONFIG_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/config_headers")
 include_directories(
 	${SAMPSDK_INCLUDE_DIR}
 	${MYSQL_PLUGIN_CONFIG_INCLUDE_DIR}
-	${PROJECT_SOURCE_DIR}/libs/samp-log-core/include
 )
 
 configure_file(
-	"../a_mysql.inc.in"
-	"a_mysql.inc"
+	"../include/a_mysql.inc.in"
+	"include/a_mysql.inc"
 	@ONLY
 )
 
@@ -28,9 +20,6 @@ configure_file(
 )
 
 add_samp_plugin(mysql 
-	${SAMPSDK_DIR}/amxplugin.cpp
-	${SAMPSDK_DIR}/amxplugin2.cpp
-	${SAMPSDK_DIR}/amx/getch.c
 	CCallback.cpp
 	CCallback.hpp
 	CConnection.cpp
@@ -84,13 +73,13 @@ target_compile_features(mysql PUBLIC
 	cxx_variadic_templates
 )
 
-add_dependencies(mysql log-core fmt)
+add_dependencies(mysql spdlog fmt sampsdk mariadbclient)
 
 if(MSVC)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 endif()
 
-target_link_libraries(mysql log-core fmt)
+target_link_libraries(mysql spdlog fmt sampsdk mariadbclient)
 
 if(UNIX)
 	if(NOT APPLE)
@@ -101,24 +90,24 @@ if(UNIX)
 		INSTALL_RPATH "$ORIGIN/..:$ORIGIN/")
 endif()
 
-if(BUILD_STATIC)
-	target_link_libraries(mysql "${MYSQLCAPI_LIBRARY_STATIC}")
-else()
-	target_link_libraries(mysql "${MYSQLCAPI_LIBRARY}")
-endif()
+# MySQL
+target_include_directories(mysql 
+	PRIVATE 
+		${SAMP_MYSQL_EXTERNAL}/mariadb/include
+		${SAMP_MYSQL_EXTERNAL_BIN}/mariadb/include
+		${BOOST_LIB_PATH}
+)
+
+target_compile_definitions(
+	mysql
+	PRIVATE
+	BOOST_ALL_NO_LIB
+	BOOST_CHRONO_HEADER_ONLY
+)
 
 install(TARGETS mysql DESTINATION "plugins/")
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/a_mysql.inc" DESTINATION "pawno/include/")
+install(FILES "${CMAKE_CURRENT_BINARY_DIR}/include/a_mysql.inc" DESTINATION "pawno/include/")
 install(FILES "${PROJECT_SOURCE_DIR}/LICENSE" DESTINATION "./")
 if(WIN32 AND MYSQLCAPI_LIBRARY_SHARED)
 	install(FILES "${MYSQLCAPI_LIBRARY_SHARED}" DESTINATION "./")
 endif()
-
-set(CPACK_PACKAGE_VERSION ${MYSQL_PLUGIN_VERSION})
-if(WIN32)
-	set(CPACK_GENERATOR ZIP)
-else()
-	set(CPACK_GENERATOR TGZ)
-endif()
-
-include(CPack)

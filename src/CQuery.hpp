@@ -6,7 +6,6 @@
 using std::string;
 using std::function;
 
-#include "CLog.hpp"
 #include "types.hpp"
 #include "mysql.hpp"
 
@@ -17,8 +16,7 @@ public: //constructor / deconstructor
 	explicit CQuery(string &&query) :
 		m_Query(query)
 	{ 
-		if (CDebugInfoManager::Get()->IsInfoAvailable())
-			m_DbgInfo = CDebugInfoManager::Get()->GetCurrentInfo();
+	
 	}
 	~CQuery() = default;
 
@@ -27,7 +25,6 @@ private: //variables
 	function<void(ResultSet_t result)> m_Callback;
 	function<void(unsigned int, string)> m_ErrorCallback;
 	ResultSet_t m_Result = nullptr;
-	std::vector<AmxFuncCallInfo> m_DbgInfo;
 
 public: //functions
 	bool Execute(MYSQL *connection);
