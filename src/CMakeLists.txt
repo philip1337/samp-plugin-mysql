@@ -118,7 +118,7 @@ endif()
 # blueg lib
 #########################
 
-add_samp_plugin(samp-plugin-mysql-lib
+add_library(samp-plugin-mysql-lib
 	CCallback.cpp
 	CCallback.hpp
 	CConnection.cpp
@@ -182,12 +182,8 @@ if(UNIX)
 	if(NOT APPLE)
 		target_link_libraries(samp-plugin-mysql-lib rt)
 	endif()
-	
-	set_target_properties(samp-plugin-mysql-lib PROPERTIES
-		INSTALL_RPATH "$ORIGIN/..:$ORIGIN/")
 endif()
 
-# MySQL
 target_include_directories(samp-plugin-mysql-lib 
 	PRIVATE 
 		${MARIADB_EXTERNAL_INCLUDE}
