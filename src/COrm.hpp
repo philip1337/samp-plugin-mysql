@@ -116,7 +116,7 @@ public:
 		SELECT,
 		UPDATE,
 		INSERT,
-		DELETE,
+		REMOVE,
 		SAVE, //not used to generate query
 	};
 
