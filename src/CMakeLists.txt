@@ -203,14 +203,14 @@ target_compile_definitions(
 # Plattform specified definitions
 if (WIN32)
 	target_compile_definitions(
-		${name}
+		samp-plugin-mysql-lib
 		PRIVATE
 		NOMINMAX
 		WIN32
 	)
 else()
 	target_compile_definitions(
-		${name}
+		samp-plugin-mysql-lib
 		PRIVATE
 		LINUX
 		NDEBUG
