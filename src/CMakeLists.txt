@@ -199,3 +199,21 @@ target_compile_definitions(
 	BOOST_ALL_NO_LIB
 	BOOST_CHRONO_HEADER_ONLY
 )
+
+# Plattform specified definitions
+if (WIN32)
+	target_compile_definitions(
+		${name}
+		PRIVATE
+		NOMINMAX
+		WIN32
+	)
+else()
+	target_compile_definitions(
+		${name}
+		PRIVATE
+		LINUX
+		NDEBUG
+	)
+endif()	
+
