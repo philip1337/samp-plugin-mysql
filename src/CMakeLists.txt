@@ -193,6 +193,8 @@ target_include_directories(samp-plugin-mysql-lib
 		${MARIADB_EXTERNAL_INCLUDE}
 		${MARIADB_EXTERNAL_INCLUDE_BIN}
 		${BOOST_LIB_PATH}
+	PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 target_compile_definitions(
