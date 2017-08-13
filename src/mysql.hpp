@@ -6,3 +6,6 @@
 #endif
 
 #include <mysql.h>
+#ifdef rest
+	#undef rest
+#endif
