@@ -1,11 +1,10 @@
 #pragma once
-
+#include <boost/variant.hpp>
 #include "CSingleton.hpp"
 
 #include <string>
 #include <map>
 #include <unordered_map>
-#include <boost/variant.hpp>
 
 using std::string;
 using std::map;
