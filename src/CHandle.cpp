@@ -214,7 +214,7 @@ Handle_t CHandleManager::Create(const char *host, const char *user,
 	}
 
 
-	static const std::hash<string> do_hash;
+	std::hash<string> do_hash;
 	size_t full_hash = 0;
 	boost::hash_combine(full_hash, do_hash(host));
 	boost::hash_combine(full_hash, do_hash(user));
