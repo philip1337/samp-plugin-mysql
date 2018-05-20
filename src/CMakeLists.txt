@@ -80,7 +80,7 @@ if (SAMP_MYSQL_INCLUDE_PLUGIN)
 		add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 	endif()
 
-	target_link_libraries(mysql spdlog fmt sampsdk mariadbclient)
+	target_link_libraries(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
 
 	if(UNIX)
 		if(NOT APPLE)
@@ -176,7 +176,7 @@ if(MSVC)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 endif()
 
-target_link_libraries(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient)
+target_link_libraries(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
 
 if(UNIX)
 	if(NOT APPLE)

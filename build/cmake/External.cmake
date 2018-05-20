@@ -7,6 +7,8 @@ if ("${BOOST_LIB_PATH}" STREQUAL "")
 	SET(BOOST_LIB_PATH ${SAMP_MYSQL_EXTERNAL}/boost)
 endif()
 
+add_subdirectory(${BOOST_LIB_PATH})
+
 ##################################################
 # AMXLib / sampsdk
 ##################################################

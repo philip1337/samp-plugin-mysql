@@ -5,8 +5,8 @@ project(samp-plugin-mysql)
 SET(MYSQL_PLUGIN_VERSION "R41-3")
 
 option(BUILD_TESTS "Build tests" OFF)
-option(SAMP_MYSQL_INCLUDE_PLUGIN "Build tests" OFF)
-option(SAMP_MYSQL_USE_FOREIGN_EXTERNAL "Build tests" ON)
+option(SAMP_MYSQL_INCLUDE_PLUGIN "Build tests" ON)
+option(SAMP_MYSQL_USE_FOREIGN_EXTERNAL "Use foreign externals" OFF)
 
 
 # Base path constants
@@ -24,8 +24,9 @@ SET(CMAKE_MODULE_PATH
 	${SAMP_MYSQL_EXTERNAL}/sampcmake
 )
 
-include(External)
-include(ExternalBoost)
+if (SAMP_MYSQL_USE_FOREIGN_EXTERNAL)
+	include(External)
+endif()
 
 add_subdirectory(src)
 
