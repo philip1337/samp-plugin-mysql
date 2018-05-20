@@ -5,8 +5,8 @@ project(samp-plugin-mysql)
 SET(MYSQL_PLUGIN_VERSION "R41-3")
 
 option(BUILD_TESTS "Build tests" OFF)
-option(SAMP_MYSQL_INCLUDE_PLUGIN "Build tests" ON)
-option(SAMP_MYSQL_USE_FOREIGN_EXTERNAL "Use foreign externals" OFF)
+option(SAMP_MYSQL_INCLUDE_PLUGIN "Build tests" OFF)
+option(SAMP_MYSQL_USE_FOREIGN_EXTERNAL "Use foreign externals" ON)
 
 
 # Base path constants
