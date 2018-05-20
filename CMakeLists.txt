@@ -8,7 +8,6 @@ option(BUILD_TESTS "Build tests" OFF)
 option(SAMP_MYSQL_INCLUDE_PLUGIN "Build tests" ON)
 option(SAMP_MYSQL_USE_FOREIGN_EXTERNAL "Use foreign externals" OFF)
 
-
 # Base path constants
 set(SAMP_MYSQL_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set(SAMP_MYSQL_BIN_ROOT ${CMAKE_BINARY_DIR})
@@ -24,7 +23,7 @@ SET(CMAKE_MODULE_PATH
 	${SAMP_MYSQL_EXTERNAL}/sampcmake
 )
 
-if (SAMP_MYSQL_USE_FOREIGN_EXTERNAL)
+if (NOT SAMP_STREAMER_USE_FOREIGN_EXTERNAL)
 	include(External)
 endif()
 
