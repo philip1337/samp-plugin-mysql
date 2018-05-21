@@ -194,7 +194,7 @@ CError<COrm> COrm::GenerateQuery(COrm::QueryType type, string &dest)
 			return GenerateUpdateQuery(dest);
 		case COrm::QueryType::INSERT:
 			return GenerateInsertQuery(dest);
-		case COrm::QueryType::DELETE:
+		case COrm::QueryType::REMOVE:
 			return GenerateDeleteQuery(dest);
 	}
 	return{ COrm::Error::INVALID_QUERY_TYPE, "invalid query type" };
