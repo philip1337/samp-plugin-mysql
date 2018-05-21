@@ -74,13 +74,13 @@ if (SAMP_MYSQL_INCLUDE_PLUGIN)
 		cxx_variadic_templates
 	)
 
-	add_dependencies(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
+	add_dependencies(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
 
 	if(MSVC)
 		add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 	endif()
 
-	target_link_libraries(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
+	target_link_libraries(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
 
 	if(UNIX)
 		if(NOT APPLE)
@@ -170,13 +170,13 @@ target_compile_features(samp-plugin-mysql-lib PUBLIC
 	cxx_variadic_templates
 )
 
-add_dependencies(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
+add_dependencies(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
 
 if(MSVC)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 endif()
 
-target_link_libraries(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
+target_link_libraries(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
 
 if(UNIX)
 	if(NOT APPLE)
