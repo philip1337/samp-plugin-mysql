@@ -74,7 +74,7 @@ if (SAMP_MYSQL_INCLUDE_PLUGIN)
 		cxx_variadic_templates
 	)
 
-	add_dependencies(mysql spdlog fmt sampsdk mariadbclient)
+	add_dependencies(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
 
 	if(MSVC)
 		add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
@@ -118,7 +118,7 @@ endif()
 # blueg lib
 #########################
 
-add_samp_plugin(samp-plugin-mysql-lib
+add_library(samp-plugin-mysql-lib
 	CCallback.cpp
 	CCallback.hpp
 	CConnection.cpp
@@ -170,7 +170,7 @@ target_compile_features(samp-plugin-mysql-lib PUBLIC
 	cxx_variadic_templates
 )
 
-add_dependencies(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient)
+add_dependencies(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any)
 
 if(MSVC)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
