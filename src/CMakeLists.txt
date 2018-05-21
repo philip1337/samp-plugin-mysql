@@ -190,14 +190,6 @@ endif()
 # MySQL
 target_include_directories(samp-plugin-mysql-lib 
 	PRIVATE 
-		${SAMP_MYSQL_EXTERNAL}/mariadb/include
-		${SAMP_MYSQL_EXTERNAL_BIN}/mariadb/include
-		${BOOST_LIB_PATH}
-)
-
-target_compile_definitions(
-	samp-plugin-mysql-lib
-	PRIVATE
-	BOOST_ALL_NO_LIB
-	BOOST_CHRONO_HEADER_ONLY
+		${MARIADB_LIB_INCLUDE_PATH}
+		${MARIADB_LIB_INCLUDE_PATH_BIN}
 )
