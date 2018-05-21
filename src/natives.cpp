@@ -217,7 +217,7 @@ AMX_DECLARE_NATIVE(Native::orm_delete)
 {
 	//CScopedDebugInfo dbg_info(amx, "orm_delete", params, "dss");
 	cell ret_val = 
-		FireOrmQueryWithCallback(amx, params, COrm::QueryType::DELETE) ? 1 : 0;
+		FireOrmQueryWithCallback(amx, params, COrm::QueryType::REMOVE) ? 1 : 0;
 	gLog->Handler()->debug( "return value: '{}'", ret_val);
 	return ret_val;
 }
