@@ -41,7 +41,21 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 	set_property(TARGET sampsdk APPEND_STRING PROPERTY LINK_FLAGS    " -m32")
 endif()
 
+##################################################
+# MariaDB
+##################################################
+
+if ("${MARIADB_LIB_PATH}" STREQUAL "")
+	# Set paths
+	SET(MARIADB_LIB_PATH ${SAMP_MYSQL_EXTERNAL}/mariadb)
+endif()
+
+SET(MARIADB_LIB_INCLUDE_PATH ${MARIADB_LIB_PATH}/include)
+SET(MARIADB_LIB_INCLUDE_PATH_BIN ${MARIADB_LIB_PATH}/include)
+
 add_subdirectory(${SAMP_MYSQL_EXTERNAL}/mariadb)
+
+
 add_subdirectory(${SAMP_MYSQL_EXTERNAL}/fmt)
 add_subdirectory(${SAMP_MYSQL_EXTERNAL}/spdlog)
 
