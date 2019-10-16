@@ -1,9 +1,9 @@
+#include "COptions.hpp"
 #include "natives.hpp"
 #include "CQuery.hpp"
 #include "CHandle.hpp"
 #include "CCallback.hpp"
 #include "CResult.hpp"
-#include "COptions.hpp"
 #include "COrm.hpp"
 #include "CLog.hpp"
 #include "misc.hpp"
@@ -11,7 +11,6 @@
 #include <fstream>
 #include <future>
 #include <fmt/printf.h>
-
 
 // native ORM:orm_create(const table[], MySQL:handle = MYSQL_DEFAULT_HANDLE);
 AMX_DECLARE_NATIVE(Native::orm_create)
