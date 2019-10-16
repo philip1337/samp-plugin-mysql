@@ -74,13 +74,20 @@ if (SAMP_MYSQL_INCLUDE_PLUGIN)
 		cxx_variadic_templates
 	)
 
-	add_dependencies(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
+	add_dependencies(mysql spdlog fmt sampsdk mariadbclient)
 
 	if(MSVC)
 		add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 	endif()
 
-	target_link_libraries(mysql spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
+	target_link_libraries(mysql spdlog fmt sampsdk 
+		mariadbclient
+		boost::system 
+		boost::any
+		boost::spirit
+		boost::variant
+		boost::lockfree
+	)
 
 	if(UNIX)
 		if(NOT APPLE)
@@ -96,14 +103,11 @@ if (SAMP_MYSQL_INCLUDE_PLUGIN)
 		PRIVATE 
 			${SAMP_MYSQL_EXTERNAL}/mariadb/include
 			${SAMP_MYSQL_EXTERNAL_BIN}/mariadb/include
-			${BOOST_LIB_PATH}
 	)
 
 	target_compile_definitions(
 		mysql
 		PRIVATE
-		BOOST_ALL_NO_LIB
-		BOOST_CHRONO_HEADER_ONLY
 	)
 
 	install(TARGETS mysql DESTINATION "plugins/")
@@ -170,26 +174,53 @@ target_compile_features(samp-plugin-mysql-lib PUBLIC
 	cxx_variadic_templates
 )
 
-add_dependencies(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
+add_dependencies(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient)
 
 if(MSVC)
 	add_definitions(-D_CRT_SECURE_NO_WARNINGS -DNOMINMAX -D_ENABLE_ATOMIC_ALIGNMENT_FIX)
 endif()
 
-target_link_libraries(samp-plugin-mysql-lib spdlog fmt sampsdk mariadbclient boost::variant boost::spirit boost::any boost::lockfree)
+target_link_libraries(samp-plugin-mysql-lib 
+	spdlog 
+	fmt 
+	sampsdk 
+	mariadbclient 
+	boost::system 
+	boost::any
+	boost::spirit
+	boost::variant
+	boost::lockfree
+)
 
 if(UNIX)
 	if(NOT APPLE)
 		target_link_libraries(samp-plugin-mysql-lib rt)
 	endif()
-	
-	set_target_properties(samp-plugin-mysql-lib PROPERTIES
-		INSTALL_RPATH "$ORIGIN/..:$ORIGIN/")
 endif()
 
-# MySQL
 target_include_directories(samp-plugin-mysql-lib 
 	PRIVATE 
-		${MARIADB_LIB_INCLUDE_PATH}
-		${MARIADB_LIB_INCLUDE_PATH_BIN}
+		${MARIADB_EXTERNAL_INCLUDE}
+		${MARIADB_EXTERNAL_INCLUDE_BIN}
+	PUBLIC
+		${CMAKE_CURRENT_SOURCE_DIR}
 )
+
+
+# Plattform specified definitions
+if (WIN32)
+	target_compile_definitions(
+		samp-plugin-mysql-lib
+		PRIVATE
+		NOMINMAX
+		WIN32
+	)
+else()
+	target_compile_definitions(
+		samp-plugin-mysql-lib
+		PRIVATE
+		LINUX
+		NDEBUG
+	)
+endif()	
+

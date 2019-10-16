@@ -5,8 +5,7 @@
 # undef ERROR
 #endif
 
-#ifdef LINUX
-# include <mysql/mysql.h>
-#else
-# include <mysql.h>
+#include <mysql.h>
+#ifdef rest
+	#undef rest
 #endif
